@@ -4,16 +4,18 @@
             <v-flex xs12 md6 offset-md3>
                 <v-card class="elevation-12">
                     <v-card-text>
-                        <h1 class="secondary--text" >Registrate Ahora</h1>
                         <v-form ref="form" v-model="valid" lazy-validation>
-                            <v-text-field v-model="newUser.email" :rules="emailRules" label="E-mail" required></v-text-field>
-                            <v-text-field v-model="newUser.username" :rules="nameRules" :counter="10" label="Usuario" required></v-text-field>
-                            <v-text-field v-model="newUser.password" :rules="passwordRules" label="Password" required
+                        <v-toolbar-title ><h1>Entra a tu cuenta</h1></v-toolbar-title>
+                            <v-avatar color="light-blue lighten-5" size="160">
+                                <img src="https://visualpharm.com/assets/17/Ronaldo-595b40b85ba036ed117da990.svg">
+                            </v-avatar>
+                            <v-text-field v-model="user.email" :rules="nameRules" label="Usuario o email" required></v-text-field>
+                            <v-text-field v-model="user.password" :rules="passwordRules" label="Password" required
                             :append-icon="show1 ? 'visibility_off' : 'visibility'"
                             :type="show1 ? 'text' : 'password'"
                              @click:append="show1 = !show1"
                             ></v-text-field>
-                            <v-btn :disabled="!valid" @click="createUser"  color="primary" class="white--text">
+                            <v-btn class="primary" :disabled="!valid" @click="loginUser">
                                 Enviar
                             </v-btn>
                         </v-form>
@@ -28,46 +30,32 @@
     import { mapActions } from 'vuex'
 
     export default {
-        name: 'Signup',
+        name: 'Login',
         data() {
             return {
                 show1:false,
                 valid:true,
-                emailRules: [
-                    v => !!v || 'E-mail es requerido',
-                    v => /.+@.+/.test(v) || 'email no es válido'
-                ],
+               
                 nameRules: [
-                    v => !!v || 'Nombre de usuario es requerido',
-                    v => (v && v.length <= 10) || 'Nombre de usuario debe ser menor o igual a 10 caracteres',
+                    v => !!v || 'Nombre de usuario o email es requerido',
                 ],
                 passwordRules:[
                     v => !!v || 'Password es requerido',
                     v => (v && v.length >= 6) || 'Password debe tener minimo 6 caracteres'
                 ],
-                newUser: {},
-                usernameTokens: {
-                    F: {
-                        pattern: /[0-9a-zA-Z-_]/,
-                        transform: v => v.toLocaleLowerCase()
-                    }
-                }
+                user: {},
             }
         },
         methods: {
             ...mapActions([
-                'registerUser'
+                'login'
             ]),
-            createUser: function () {
+            loginUser: function () {
                 if (this.$refs.form.validate()) {
                     let vm = this;
-                    this.registerUser(this.newUser)
-                        .then(function () {
-                            vm.$router.push({
-                                name: 'confirmation'
-                            });
+                    vm.login(vm.user)
+                        .then(function (response) {
                         }).catch(function (error) {
-                            console.log(error);
                             vm.$store.commit('showError', {
                                 visible:true,
                                 type: 'error',

@@ -3,8 +3,28 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Signup from  './views/Signup'
+import Confirmation from './views/Confirmation'
+import Active from './views/Active'
+import Login from './views/Login'
+import store from './store'
 
 Vue.use(Router)
+
+
+const guestUser = (to, from, next) =>{
+  if(store.getters.isAuth){
+    return next('/');
+  }
+  return next();
+}
+
+const authorizedUser =  (to, from, next) =>{
+  if(!store.getters.isAuth){
+    return next('/');
+  }
+  return next();
+}
+
 
 export default new Router({
   mode: 'history',
@@ -22,7 +42,26 @@ export default new Router({
     {
       path: '/signup',
       name: 'signup',
-      component: Signup
+      component: Signup,
+      beforeEnter: guestUser
+    },
+    {
+      path: '/confirmation',
+      name: 'confirmation',
+      component: Confirmation,
+      beforeEnter:guestUser
+    },
+    {
+      path: '/account-active',
+      name: 'activation',
+      component: Active,
+      beforeEnter: guestUser,
+    },
+    {
+      path: '/login',
+      name:'login',
+      component: Login,
+      beforeEnter: guestUser,
     }
   ]
 })
