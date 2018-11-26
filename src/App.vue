@@ -1,5 +1,5 @@
 <template>
-  <v-app class="background-app">
+  <v-app class="background-app" v-bind:style="{ 'background-image': background}">
     <v-navigation-drawer persistent :mini-variant="miniVariant" :clipped="clipped" v-model="drawer"
       enable-resize-watcher app>
       <v-list>
@@ -37,11 +37,11 @@
           </v-avatar>
         </v-btn>
         <v-list>
-          <v-list-tile>
-            <v-list-tile-title><a href="">menu1</a></v-list-tile-title>
+          <v-list-tile @click="">
+            <v-list-tile-title>menu1</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile>
-            <v-list-tile-title>Logout</v-list-tile-title>
+          <v-list-tile @click="logoutMethod">
+            <v-list-tile-title >Logout</v-list-tile-title>
           </v-list-tile>
         </v-list>
       </v-menu>
@@ -53,7 +53,7 @@
 
     <v-content>
       {{alertVisible}}
-      <v-alert v-model="showAlert" dismissible :type="$store.state.alert.type" transition="fade-transition">{{$store.state.alert.text}}</v-alert>
+      <v-alert class="alertMargin" v-model="showAlert" dismissible :type="$store.state.alert.type" transition="fade-transition">{{$store.state.alert.text}}</v-alert>
       <router-view />
     </v-content>
 
@@ -81,6 +81,7 @@ import {mapGetters} from 'vuex'
         miniVariant: false,
         right: true,
         rightDrawer: false,
+        background:''
       }
     },
     computed: {
@@ -94,6 +95,17 @@ import {mapGetters} from 'vuex'
         } else {
           this.showAlert = false;
         }
+      }
+    },
+    created: function(){
+        let rand = Math.floor((Math.random() * 6) + 1);
+        this.background=`url(https://s3.amazonaws.com/app.estadiototal.com/public/img/background-${rand}.jpg)!important`;
+    },
+    methods:{
+      logoutMethod: function(){
+        let vm = this;
+        console.log('salir');
+        this.$store.dispatch('logout').then(function(){ vm.$router.push({name:'home'});});
       }
     },
     watch: {
@@ -121,12 +133,18 @@ import {mapGetters} from 'vuex'
   }
 
   .background-app {
-    background-color: #eaf6f7;
+    background-size: cover!important;
+    background-color:#DEDEDE;
   }
 
   .toolbar i,
   .toolbar {
     color: #fff !important;
   }
+ 
+ .alertMargin{
+   margin-top: 0px;
+ }
+
  
 </style>

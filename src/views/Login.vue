@@ -1,7 +1,7 @@
 <template>
     <v-container grid-list-md text-xs-center>
         <v-layout row>
-            <v-flex xs12 md6 offset-md3>
+            <v-flex xs12 md4 offset-md4>
                 <v-card class="elevation-12">
                     <v-card-text>
                         <v-form ref="form" v-model="valid" lazy-validation>
@@ -55,11 +55,12 @@
                     let vm = this;
                     vm.login(vm.user)
                         .then(function (response) {
+                            vm.$router.push({name:'dashboard'});
                         }).catch(function (error) {
                             vm.$store.commit('showError', {
                                 visible:true,
                                 type: 'error',
-                                text: error.message,
+                                text: error,
                             });
                         });
                 }

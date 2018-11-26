@@ -6,6 +6,7 @@ import Signup from  './views/Signup'
 import Confirmation from './views/Confirmation'
 import Active from './views/Active'
 import Login from './views/Login'
+import Dashboard from './views/Dashboard'
 import store from './store'
 
 Vue.use(Router)
@@ -13,14 +14,14 @@ Vue.use(Router)
 
 const guestUser = (to, from, next) =>{
   if(store.getters.isAuth){
-    return next('/');
+    return next('/dashboard');
   }
   return next();
 }
 
 const authorizedUser =  (to, from, next) =>{
   if(!store.getters.isAuth){
-    return next('/');
+    return next('/login');
   }
   return next();
 }
@@ -62,6 +63,12 @@ export default new Router({
       name:'login',
       component: Login,
       beforeEnter: guestUser,
+    },
+    {
+      path: '/dashboard',
+      name:'dashboard',
+      component: Dashboard,
+      beforeEnter: authorizedUser,
     }
   ]
 })
