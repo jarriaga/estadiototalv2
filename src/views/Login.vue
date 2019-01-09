@@ -51,6 +51,11 @@
                 'login'
             ]),
             loginUser: function () {
+                 this.$store.commit('showError', {
+                                visible:false,
+                                type: 'error',
+                                text: '',
+                            });
                 if (this.$refs.form.validate()) {
                     let vm = this;
                     vm.login(vm.user)

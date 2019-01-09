@@ -21,6 +21,7 @@ export default  {
     },
     showError(state,payload){
       state.alert = payload;
+      console.log(state.alert);
     }
   } //End mutations
 
