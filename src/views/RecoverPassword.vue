@@ -23,6 +23,9 @@
                         <v-alert :value="success" type="success">
                             Se ha reestablecido su contraseña
                         </v-alert>
+                        <v-alert :value="nomatch" type="error">
+                            Las contraseñas no coinciden
+                        </v-alert>
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -36,19 +39,18 @@
                 name: 'ForgotPassword',
                 data() {
                     return {
-                        show1:false,
-                        success:false,
+                        show1: false,
+                        success: false,
+                        nomatch: false,
                         formValid: true,
                         passwordRules: [
                             v => !!v || 'Password es requerido',
                             v => (v && v.length >= 6) || 'Password debe tener mínimo 6 caracteres'
                         ],
-                        userData: {token:this.$route.params.token},
-                        usernameTokens: {
-                            F: {
-                                pattern: /[0-9a-zA-Z-_]/,
-                                transform: v => v.toLocaleLowerCase()
-                            }
+                        userData: {
+                            token: this.$route.params.token,
+                            password: '',
+                            password2: ''
                         }
                     };
                 },
@@ -57,17 +59,21 @@
                             'recoverPassword'
                     ]),
                     sendData: function () {
-                        if (this.$refs.form.validate()) {
+                        if (this.$refs.form.validate() && this.password === this.password2) {
+                            this.nomatch = false;
                             this.recoverPassword(this.userData)
                                     .then(function () {
                                         this.success = true;
                                         this.error = false;
+                                        this.$refs.form.reset();
                                     })
                                     .catch(function (error) {
                                         this.error = true;
                                         this.success = false;
                                         console.log(error);
-                                    });
+                                    });                                
+                        } else {
+                            this.nomatch = true;
                         }
                     }
                 }

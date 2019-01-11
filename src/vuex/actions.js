@@ -235,7 +235,7 @@ export const actions = {
     commit
     }, payload) {
         return new Promise((resolve, reject) => {
-            alert('token ' + payload.token);
+            console.log(payload);
         });
     }, //End recoverPassword
 } //End Actions
