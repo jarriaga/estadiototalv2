@@ -7,6 +7,8 @@ import Confirmation from './views/Confirmation'
 import Active from './views/Active'
 import Login from './views/Login'
 import Dashboard from './views/Dashboard'
+import ForgotPassword from './views/ForgotPassword'
+import RecoverPassword from './views/RecoverPassword'
 import store from './store'
 
 Vue.use(Router)
@@ -69,6 +71,16 @@ export default new Router({
       name:'dashboard',
       component: Dashboard,
       beforeEnter: authorizedUser,
+    },
+    {
+      path: '/forgotPassword',
+      name: 'forgotPassword',
+      component: ForgotPassword
+    },
+    {
+      path: '/recoverPassword/:token',
+      name: 'recoverPassword',
+      component: RecoverPassword
     }
   ]
 })
