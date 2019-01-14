@@ -146,5 +146,9 @@ import {mapGetters} from 'vuex'
    margin-top: 0px;
  }
 
+ v-card-text p{
+   color:#777;
+ }
+
  
 </style>
