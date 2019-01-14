@@ -228,6 +228,10 @@
         color:#777;
     }
 
+ v-card-text p{
+   color:#777;
+ }
+
  
 </style>
 

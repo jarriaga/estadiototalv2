@@ -5,7 +5,7 @@
                 <v-card class="elevation-12">
                     <v-card-text>
                         <v-toolbar-title ><h1>Ingresa tu nuevo password</h1></v-toolbar-title> 
-                        <v-form class="my-4" ref="form" v-model="formValid" lazy-validation>
+                        <v-form ref="form" v-model="formValid" lazy-validation>
                             <v-text-field v-model="userData.password" :rules="passwordRules" label="Password" required
                                           :append-icon="show1 ? 'visibility_off' : 'visibility'"
                                           :type="show1 ? 'text' : 'password'"
@@ -16,7 +16,7 @@
                                           :type="show1 ? 'text' : 'password'"
                                           @click:append="show1 = !show1"
                                           ></v-text-field>
-                            <v-btn :disabled="!formValid" @click="sendData"  color="success" class="white--text mt-5">
+                            <v-btn :disabled="!formValid" @click="sendData"  color="success" class="white--text">
                                 actualizar password
                             </v-btn>
                         </v-form>
