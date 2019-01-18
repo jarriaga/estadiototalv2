@@ -4,7 +4,7 @@
             <v-flex xs12 md6 offset-md3>
                 <v-card class="elevation-12">
                     <v-card-text>
-                        <h1 class="secondary--text" >Recuperar contraseña</h1>                        
+                        <v-toolbar-title ><h1>Ingresa tu nuevo password</h1></v-toolbar-title> 
                         <v-form ref="form" v-model="formValid" lazy-validation>
                             <v-text-field v-model="userData.password" :rules="passwordRules" label="Password" required
                                           :append-icon="show1 ? 'visibility_off' : 'visibility'"
@@ -17,7 +17,7 @@
                                           @click:append="show1 = !show1"
                                           ></v-text-field>
                             <v-btn :disabled="!formValid" @click="sendData"  color="success" class="white--text">
-                                Enviar
+                                actualizar password
                             </v-btn>
                         </v-form>
                         <v-alert :value="success" type="success">
