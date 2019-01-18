@@ -8,10 +8,20 @@ import Active from './views/Active'
 import Login from './views/Login'
 import Dashboard from './views/Dashboard'
 import ForgotPassword from './views/ForgotPassword'
+import Announcement from './views/Announcement'
+import Credentials from './views/Credentials'
+import GeneralTable from './views/GeneralTable'
+import ImportExport from './views/ImportExport'
+import Players from './views/Players'
+import Referees from './views/Referees'
+import Registration from './views/Registration'
+import Regulation from './views/Regulation'
+import Stadiums from './views/Stadiums'
+import Teams from './views/Teams'
 import RecoverPassword from './views/RecoverPassword'
 import store from './store'
 
-Vue.use(Router)
+Vue.use(Router);
 
 
 const guestUser = (to, from, next) =>{
@@ -19,14 +29,14 @@ const guestUser = (to, from, next) =>{
     return next('/dashboard');
   }
   return next();
-}
+};
 
 const authorizedUser =  (to, from, next) =>{
   if(!store.getters.isAuth){
     return next('/login');
   }
   return next();
-}
+};
 
 
 export default new Router({
@@ -58,29 +68,89 @@ export default new Router({
       path: '/account-active',
       name: 'activation',
       component: Active,
-      beforeEnter: guestUser,
+      beforeEnter: guestUser
     },
     {
       path: '/login',
       name:'login',
       component: Login,
-      beforeEnter: guestUser,
+      beforeEnter: guestUser
     },
     {
       path: '/dashboard',
       name:'dashboard',
       component: Dashboard,
-      beforeEnter: authorizedUser,
+      beforeEnter: authorizedUser
     },
     {
-      path: '/forgotPassword',
+      path: '/forgot-password',
       name: 'forgotPassword',
       component: ForgotPassword
     },
     {
-      path: '/recoverPassword/:token',
+      path: '/recover-password/:token',
       name: 'recoverPassword',
       component: RecoverPassword
+    },
+    {
+      path: '/teams',
+      name:'teams',
+      component: Teams,
+      beforeEnter: authorizedUser
+    },
+    {
+      path: '/players',
+      name:'players',
+      component: Players,
+      beforeEnter: authorizedUser
+    },
+    {
+      path: '/stadiums',
+      name:'stadiums',
+      component: Stadiums,
+      beforeEnter: authorizedUser
+    },
+    {
+      path: '/general-table',
+      name:'general-table',
+      component: GeneralTable,
+      beforeEnter: authorizedUser
+    },
+    {
+      path: '/import-export',
+      name:'import-export',
+      component: ImportExport,
+      beforeEnter: authorizedUser
+    },
+    {
+      path: '/referees',
+      name:'referees',
+      component: Referees,
+      beforeEnter: authorizedUser
+    },
+    {
+      path: '/regulation',
+      name:'regulation',
+      component: Regulation,
+      beforeEnter: authorizedUser
+    },
+    {
+      path: '/announcement',
+      name:'announcement',
+      component: Announcement,
+      beforeEnter: authorizedUser
+    },
+    {
+      path: '/registration',
+      name:'registration',
+      component: Registration,
+      beforeEnter: authorizedUser
+    },
+    {
+      path: '/credentials',
+      name:'credentials',
+      component: Credentials,
+      beforeEnter: authorizedUser
     }
   ]
 })
