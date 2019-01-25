@@ -198,6 +198,7 @@
 
 
 <style scoped>
+
     .logo {
         width: 100px;
     }
@@ -220,5 +221,10 @@
         
     }*/
 
+ v-card-text p{
+   color:#777;
+ }
 
+ 
 </style>
+
