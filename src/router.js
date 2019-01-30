@@ -20,6 +20,7 @@ import Stadiums from './views/Stadiums'
 import Teams from './views/Teams'
 import RecoverPassword from './views/RecoverPassword'
 import store from './store'
+import NotFoundComponent from './views/NotFoundComponent'
 
 Vue.use(Router);
 
@@ -85,12 +86,14 @@ export default new Router({
     {
       path: '/forgot-password',
       name: 'forgotPassword',
-      component: ForgotPassword
+      component: ForgotPassword,
+      beforeEnter: guestUser
     },
     {
       path: '/recover-password/:token',
       name: 'recoverPassword',
-      component: RecoverPassword
+      component: RecoverPassword,
+      beforeEnter: guestUser
     },
     {
       path: '/teams',
@@ -151,6 +154,7 @@ export default new Router({
       name:'credentials',
       component: Credentials,
       beforeEnter: authorizedUser
-    }
+    },
+    { path: '*', component: NotFoundComponent }
   ]
 })
