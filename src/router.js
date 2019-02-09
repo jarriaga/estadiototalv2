@@ -19,6 +19,7 @@ import Regulation from './views/Regulation'
 import Stadiums from './views/Stadiums'
 import Teams from './views/Teams'
 import RecoverPassword from './views/RecoverPassword'
+import Roles from './views/Roles'
 import store from './store'
 
 Vue.use(Router);
@@ -96,6 +97,12 @@ export default new Router({
       path: '/teams',
       name:'teams',
       component: Teams,
+      beforeEnter: authorizedUser
+    },
+    {
+      path: '/roles',
+      name:'roles',
+      component: Roles,
       beforeEnter: authorizedUser
     },
     {

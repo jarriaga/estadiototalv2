@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- NAVIGATION DRAWER FOR EDITION -->
-        <v-navigation-drawer v-model="drawer" width="1000" touchless temporary right disable-resize-watcher app>
+        <v-navigation-drawer v-model="drawer" :width="edition_drawer_width" touchless temporary right disable-resize-watcher app>
             <v-toolbar dark color="blue-grey darken-2">
                 <v-btn icon dark @click="close">
                     <v-icon>close</v-icon>

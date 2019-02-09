@@ -129,7 +129,7 @@
                         right: null,
                         showAlert: false,
                         items: [
-                            {icon: 'fas fa-trophy', title: 'Torneos', subitems: [{title: 'Equipos', url: '/teams'}, {title: 'Jugadores', url: '/players'}, {title: 'Estadios/Canchas', url: '/stadiums'}]},
+                            {icon: 'fas fa-trophy', title: 'Torneos', subitems: [{title: 'Rol de partidos', url: '/roles'},{title: 'Equipos', url: '/teams'}, {title: 'Jugadores', url: '/players'}, {title: 'Estadios/Canchas', url: '/stadiums'}]},
                             {icon: 'fas fa-futbol', title: 'Partidos', subitems: [{title: 'Tabla general', url: '/general-table'}, {title: 'Exportar/Importar', url: '/import-export'}]},
                             {icon: 'fas fa-balance-scale', title: 'Arbitraje', subitems: [{title: 'Árbitros', url: '/referees'}]},
                             {icon: 'fas fa-star', title: 'Contenido', subitems: [{title: 'Reglamento', url: '/regulation'}, {title: 'Convocatoria', url: '/announcement'}]},
@@ -139,7 +139,7 @@
                         //right: true,
                         rightDrawer: false,
                         background: '',
-                        isMobile: window.screen.availWidth < 720
+                        // mobile: false
                     };
                 },
                 computed: {
@@ -153,6 +153,9 @@
                         } else {
                             this.showAlert = false;
                         }
+                    },
+                    isMobile(){
+                        return window.screen.availWidth < 720;
                     }
                 },
                 created: function () {

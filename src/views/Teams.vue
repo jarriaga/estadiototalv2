@@ -7,7 +7,7 @@
                         <h1>Mis equipos</h1>
                     </v-card-title>
                     <v-card-text>
-                        <teams-table></teams-table>
+                        <teams-admin :selectable="false"></teams-admin>
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -19,11 +19,11 @@
 
 <script>
     import {mapActions} from 'vuex'
-    import TeamsTable from './../components/TeamsTableAdmin';
+    import TeamsAdmin from './../components/TeamsAdmin';
 
     export default {
         name: 'Dashboard',
-        components:{ TeamsTable },
+        components:{ TeamsAdmin },
         data() {
             return {
                
