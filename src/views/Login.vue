@@ -15,6 +15,7 @@
                             :type="show1 ? 'text' : 'password'"
                              @click:append="show1 = !show1"
                             ></v-text-field>
+                            <p class="text-md-right"> <router-link :to="{name:'forgotPassword'}"> Olvidaste tu password? </router-link> </p>
                             <v-btn class="primary" :disabled="!valid" @click="loginUser">
                                 Enviar
                             </v-btn>
