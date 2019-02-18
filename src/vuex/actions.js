@@ -228,7 +228,13 @@ export const actions = {
     commit
     }, payload) {
         return new Promise((resolve, reject) => {
-            alert('recovering password of ' + payload.email);
+            axios.post(`/forgot-password/`,payload)
+            .then(response => {
+                resolve(response);
+            })
+            .catch(error => {
+                reject(error.response.data.error);
+            })
         });
     }, //End forgotPassword
     recoverPassword( {

@@ -4,9 +4,10 @@
             <v-flex xs12 md6 offset-md3>
                 <v-card class="elevation-12">
                     <v-card-text>
-                        <v-toolbar-title><h1>Recuperar Password</h1></v-toolbar-title>
-                        <p class="grey--text text--darken-1 text-sm-left mt-3">Ingresa el email y recibirás un correo para 
-                            resetear tu password
+                        <v-toolbar-title><h1>Recupera tu password</h1></v-toolbar-title>
+                        <p class=" text-sm-left mt-3">
+                            Ingresa tu email con el cual te registraste a EstadioTotal. Te enviaremos un email con tu nombre de usuario
+                            y un link para asignar un nuevo password
                         </p>
                         <v-form ref="form" v-model="formValid" lazy-validation>
                             <v-text-field v-model="userData.email" :rules="emailRules" label="E-mail" required></v-text-field>
