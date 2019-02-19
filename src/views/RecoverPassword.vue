@@ -5,7 +5,7 @@
                 <v-card class="elevation-12">
                     <v-card-text>
                         <v-toolbar-title ><h1>Ingresa tu nuevo password</h1></v-toolbar-title> 
-                        <v-form ref="form" v-model="formValid" lazy-validation>
+                        <v-form class="my-4" ref="form" v-model="formValid" lazy-validation>
                             <v-text-field v-model="userData.password" :rules="passwordRules" label="Password" required
                                           :append-icon="show1 ? 'visibility_off' : 'visibility'"
                                           :type="show1 ? 'text' : 'password'"
@@ -16,14 +16,14 @@
                                           :type="show1 ? 'text' : 'password'"
                                           @click:append="show1 = !show1"
                                           ></v-text-field>
-                            <v-btn :disabled="!formValid" @click="sendData"  color="success" class="white--text">
+                            <v-btn :disabled="!formValid" @click="sendData"  color="success" class="white--text mt-5">
                                 actualizar password
                             </v-btn>
                         </v-form>
-                        <v-alert :value="success" type="success">
+                        <v-alert v-show="success" type="success">
                             Se ha reestablecido su contraseña
                         </v-alert>
-                        <v-alert :value="nomatch" type="error">
+                        <v-alert v-show="nomatch" type="error">
                             Las contraseñas no coinciden
                         </v-alert>
                     </v-card-text>
@@ -59,17 +59,20 @@
                             'recoverPassword'
                     ]),
                     sendData: function () {
-                        if (this.$refs.form.validate() && this.password === this.password2) {
+                        this.error=this.success=this.nomatch= false;
+                        if (this.$refs.form.validate() && this.userData.password === this.userData.password2) {
                             this.nomatch = false;
+                            var vm = this;
                             this.recoverPassword(this.userData)
-                                    .then(function () {
-                                        this.success = true;
-                                        this.error = false;
-                                        this.$refs.form.reset();
+                                    .then(function (data) {
+                                        console.log('process');
+                                        vm.success = true;
+                                        vm.error = false;
+                                        vm.$refs.form.reset();
                                     })
                                     .catch(function (error) {
-                                        this.error = true;
-                                        this.success = false;
+                                        vm.error = true;
+                                        vm.success = false;
                                         console.log(error);
                                     });                                
                         } else {

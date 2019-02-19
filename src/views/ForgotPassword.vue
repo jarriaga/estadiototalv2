@@ -3,7 +3,7 @@
         <v-layout row>
             <v-flex xs12 md6 offset-md3>
                 <v-card class="elevation-12">
-                    <v-card-text>
+                    <v-card-text v-show="!submitEmail">
                         <v-toolbar-title><h1>Recupera tu password</h1></v-toolbar-title>
                         <p class=" text-sm-left mt-3">
                             Ingresa tu email con el cual te registraste a EstadioTotal. Te enviaremos un email con tu nombre de usuario
@@ -22,6 +22,18 @@
                             El e-mail <strong>email@example.com</strong> no se encuentra registrado.
                         </v-alert>
                     </v-card-text>
+                    <v-card-text v-show="submitEmail">
+                        <v-toolbar-title><h1>Recupera tu password</h1></v-toolbar-title>
+
+                        <p class="mt-3">
+                            <i class="fa fa-envelope fa-4x text-center"></i>
+                        </p>
+                        <p class=" text-sm-left my-4">
+
+                            Revisa tu email, te hemos enviado las instrucciones para que puedas
+                            asignar un nuevo password a tu cuenta de EstadioTotal
+                        </p>
+                    </v-card-text>
                 </v-card>
             </v-flex>
         </v-layout>
@@ -34,6 +46,7 @@
                 name: 'ForgotPassword',
                 data() {
                     return {
+                        submitEmail:false,
                         success: false,
                         error: false,
                         formValid: true,
@@ -56,14 +69,16 @@
                     ]),
                     sendData: function () {
                         if (this.$refs.form.validate()) {
+                            var vm = this;
                             this.forgotPassword(this.userData)
                                     .then(function () {
-                                        this.success = true;
-                                        this.error = false;
+                                        vm.submitEmail = true;
+                                        vm.success = true;
+                                        vm.error = false;
                                     })
                                     .catch(function (error) {
-                                        this.error = true;
-                                        this.success = false;
+                                        vm.error = true;
+                                        vm.success = false;
                                         console.log(error);
                             });
                         }
