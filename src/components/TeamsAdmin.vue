@@ -146,7 +146,14 @@
                       <v-layout row wrap>
                         <v-flex v-for="(item, index) in props.item.matches" :key="index" xs6>
                           <v-card dark color="secondary">
-                            <v-card-text class="px-0">{{item.alias}}</v-card-text>
+                            <v-card-text class="px-0">
+                              <v-flex xs12>
+                                <v-avatar :tile="false" :size="35" color="grey lighten-4">
+                                  <img :src="item.logo" :alt="props.item.alias">
+                                </v-avatar>
+                              </v-flex>
+                              <v-flex xs12>{{item.alias}}</v-flex>
+                            </v-card-text>
                           </v-card>
                         </v-flex>
                       </v-layout>
@@ -223,10 +230,10 @@
           <v-icon :color="props.item.status.color">{{ props.item.status.icon }}</v-icon>
         </td>
         <td v-if="!selectable" class="justify-center layout px-0">
-          <v-btn @click="editItem(props.item)" flat icon>
+          <v-btn title="Editar equipo" @click="editItem(props.item)" flat icon>
             <v-icon small>edit</v-icon>
           </v-btn>
-          <v-btn @click="deleteItem(props.item)" flat icon>
+          <v-btn title="Eliminar equipo" @click="deleteItem(props.item)" flat icon>
             <v-icon small>delete</v-icon>
           </v-btn>
         </td>

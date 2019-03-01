@@ -93,11 +93,11 @@
                     </v-avatar>
                 </v-btn>
                 <v-list>
-                    <v-list-tile @click="">
+                    <v-list-tile>
                         <v-list-tile-title>menu1</v-list-tile-title>
                     </v-list-tile>
                     <v-list-tile @click="logoutMethod">
-                        <v-list-tile-title >Logout</v-list-tile-title>
+                        <v-list-tile-title >Salir</v-list-tile-title>
                     </v-list-tile>
                 </v-list>
             </v-menu>
