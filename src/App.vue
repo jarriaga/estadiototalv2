@@ -1,3 +1,4 @@
+
 <template>
     <v-app class="background-app" v-bind:style="{ 'background-image': background}">
         <!--<v-navigation-drawer v-if="isAuth" permanent="true" :mini-variant-width="280" :mini-variant="true" 
@@ -292,3 +293,4 @@
         color: #777;
     }
 </style>
+
