@@ -22,6 +22,7 @@ import RecoverPassword from './views/RecoverPassword'
 import Roles from './views/Roles'
 import store from './store'
 import NotFoundComponent from './views/NotFoundComponent'
+import Tournaments from './views/Tournaments'
 
 Vue.use(Router);
 
@@ -160,6 +161,12 @@ export default new Router({
       path: '/credentials',
       name:'credentials',
       component: Credentials,
+      beforeEnter: authorizedUser
+    },
+    {
+      path: '/tournaments',
+      name:'tournaments',
+      component: Tournaments,
       beforeEnter: authorizedUser
     },
     { path: '*', component: NotFoundComponent }
