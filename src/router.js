@@ -5,7 +5,7 @@ import About from './views/About.vue'
 import Signup from  './views/Signup'
 import Confirmation from './views/Confirmation'
 import Active from './views/Active'
-import Login from './views/Login'
+import Login from './views/Login' 
 import Dashboard from './views/Dashboard'
 import ForgotPassword from './views/ForgotPassword'
 import Announcement from './views/Announcement'
@@ -23,6 +23,7 @@ import Roles from './views/Roles'
 import store from './store'
 import NotFoundComponent from './views/NotFoundComponent'
 import Tournaments from './views/Tournaments'
+
 
 Vue.use(Router);
 

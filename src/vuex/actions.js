@@ -240,8 +240,16 @@ export const actions = {
     recoverPassword( {
     commit
     }, payload) {
+        console.log(payload);
         return new Promise((resolve, reject) => {
-            resolve();
+            axios.post(`/recover-p/`,payload)
+            .then(response => {
+                resolve(response);
+                resolve('Ocurrio un error, intente nuevamente')
+            })
+            .catch(error => {
+                reject(error.response.data.error);
+            })
         });
     }, //End recoverPassword
 } //End Actions

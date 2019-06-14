@@ -15,10 +15,10 @@
                             </v-btn>
                         </v-form>
                         <v-alert :value="success" type="success">
-                            Se ha enviado un mensaje de recuperación a <strong>email@example.com</strong>
+                            Se ha enviado un mensaje de recuperación a <strong>{{userData.email}}</strong>
                         </v-alert>
                         <v-alert :value="error" type="error">
-                            El e-mail <strong>email@example.com</strong> no se encuentra registrado.
+                            El e-mail <strong>{{userData.email}}</strong> no se encuentra registrado.
                         </v-alert>
                     </v-card-text>
                     <v-card-text v-show="submitEmail">

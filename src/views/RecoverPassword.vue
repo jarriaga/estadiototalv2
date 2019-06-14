@@ -21,8 +21,10 @@
                             </v-btn>
                         </v-form>
                         <v-alert v-show="success" type="success">
-                            Se ha reestablecido su contraseña
+                            
+                            <router-link :to="{name:'login'}">Se ha reestablecido su contraseña</router-link>
                         </v-alert>
+                        
                         <v-alert v-show="nomatch" type="error">
                             Las contraseñas no coinciden
                         </v-alert>
@@ -34,6 +36,8 @@
 </template>
 
 <script>
+
+var estado=true;
     import { mapActions } from 'vuex'
             export default {
                 name: 'ForgotPassword',
@@ -69,6 +73,7 @@
                                         vm.success = true;
                                         vm.error = false;
                                         vm.$refs.form.reset();
+                                    
                                     })
                                     .catch(function (error) {
                                         vm.error = true;
