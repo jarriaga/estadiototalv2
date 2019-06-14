@@ -1,13 +1,16 @@
 <template>
     <v-container grid-list-md >
+        <drawer-add-tournament v-bind:show="show" v-on:close-drawer="closeDrawer"></drawer-add-tournament>
         <v-layout row>
             <v-flex xs12 md12>
                 <v-card class="elevation-12">
                     <v-card-title>
                         <h1>Mis Torneos</h1>
+                        <v-spacer></v-spacer>
+                        <v-btn color="secondary" @click="showDrawer">Nuevo Torneo</v-btn>
                     </v-card-title>
                     <v-card-text>
-                        <teams-admin :selectable="false"></teams-admin>
+                        <tournament-table-admin></tournament-table-admin>
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -19,18 +22,23 @@
 
 <script>
     import {mapActions} from 'vuex'
-    import TeamsAdmin from './../components/TeamsAdmin';
-
+    import TournamentTableAdmin from './../components/TournamentTableAdmin'
+    import DrawerAddTournament from './../components/DrawerAddTournament'
     export default {
         name: 'Tournaments',
-        components:{ TeamsAdmin },
+        components:{ TournamentTableAdmin, DrawerAddTournament },
         data() {
             return {
-               
+               show:false
             }
         },
         methods: {
-           
+           showDrawer:function(){
+               this.show=true
+           },
+           closeDrawer:function(value){
+               this.show=value;
+           }
         }
     }
 </script>
