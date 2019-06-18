@@ -13,13 +13,11 @@
 </template>
 
 <script>
-    import {
-        mapActions
-    } from 'vuex'
+    import { mapActions } from 'vuex'
 
     export default {
         name: 'TournamentTable',
-        data() {
+        data: function () {
             return {
                 headers: [{
                         text: 'Torneo',
@@ -39,21 +37,19 @@
                 tournaments: []
             }
         },
-        created: 
-             function () {
-                let vm = this;
-                vm.tournamentList().then(result => {
-                    let data = result.map(item => {
-                        return {
-                            name: item.name,
-                            description: item.description,
-                            status: item.status
-                        }
-                    });
-                    vm.tournaments = data;
-                })
-            }
-        ,
+        created: function () {
+            let vm = this;
+            vm.tournamentList().then(result => {
+                let data = result.map(item => {
+                    return {
+                        name: item.name,
+                        description: item.description,
+                        status: item.status
+                    }
+                });
+                vm.tournaments = data;
+            })
+        },
         methods: {
             ...mapActions([
                 'tournamentList'
@@ -66,13 +62,13 @@
     }
 </script>
 <style scoped>
-.main-table-ele, .main-table-ele a{
-   text-decoration: none!important;
-   font-weight: bold;
- }
- .table-container td{
-     color: #777;
- }
+    .main-table-ele,
+    .main-table-ele a {
+        text-decoration: none !important;
+        font-weight: bold;
+    }
 
-
+    .table-container td {
+        color: #777;
+    }
 </style>
