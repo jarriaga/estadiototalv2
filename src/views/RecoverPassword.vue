@@ -4,8 +4,8 @@
             <v-flex xs12 md6 offset-md3>
                 <v-card class="elevation-12">
                     <v-card-text>
-                        <v-toolbar-title ><h1>Ingresa tu nuevo password</h1></v-toolbar-title> 
-                        <v-form ref="form" v-model="formValid" lazy-validation>
+                        <v-toolbar-title ><h1 v-show="showForm">Ingresa tu nuevo password</h1></v-toolbar-title> 
+                        <v-form ref="form" v-model="formValid" lazy-validation v-show="showForm">
                             <v-text-field v-model="userData.password" :rules="passwordRules" label="Password" required
                                           :append-icon="show1 ? 'visibility_off' : 'visibility'"
                                           :type="show1 ? 'text' : 'password'"
@@ -20,11 +20,7 @@
                                 actualizar password
                             </v-btn>
                         </v-form>
-                        <v-alert v-show="success" type="success">
-                            
-                            <router-link :to="{name:'login'}">Se ha reestablecido su contraseña</router-link>
-                        </v-alert>
-                        
+                        <v-toolbar-title >  <router-link :to="{name:'login'}"><h2 v-show="success">Se ha restablecido tu nueva contraseña</h2> </router-link></v-toolbar-title>               
                         <v-alert v-show="nomatch" type="error">
                             Las contraseñas no coinciden
                         </v-alert>
@@ -36,13 +32,12 @@
 </template>
 
 <script>
-
-var estado=true;
     import { mapActions } from 'vuex'
             export default {
                 name: 'ForgotPassword',
                 data() {
                     return {
+                        showForm: true,
                         show1: false,
                         success: false,
                         nomatch: false,
@@ -69,7 +64,8 @@ var estado=true;
                             var vm = this;
                             this.recoverPassword(this.userData)
                                     .then(function (data) {
-                                        console.log('process');
+                                        console.log('process')
+                                        vm.showForm=false;
                                         vm.success = true;
                                         vm.error = false;
                                         vm.$refs.form.reset();

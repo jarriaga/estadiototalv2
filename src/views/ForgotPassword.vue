@@ -3,17 +3,19 @@
         <v-layout row>
             <v-flex xs12 md6 offset-md3>
                 <v-card class="elevation-12">
-                    <v-card-text>
-                        <v-toolbar-title><h1>Olvidé mi contraseña</h1></v-toolbar-title>
-                        <p class="grey--text text--darken-1 text-sm-left">Ingresa el email con el cual te registraste y recibirás un correo de confirmación para 
+                    <v-card-text >
+                       
+                       <v-toolbar-title v-show="submitEmail1"><h1 v-show="submitEmail1">Olvidé mi contraseña</h1></v-toolbar-title>
+                        <p class="grey--text text--darken-1 text-sm-left" v-show="submitEmail1">Ingresa el email con el cual te registraste y recibirás un correo de confirmación para 
                             actualizar tu password
                         </p>
-                        <v-form ref="form" v-model="formValid" lazy-validation>
+                        <v-form ref="form" v-model="formValid" lazy-validation v-show="submitEmail1"> 
                             <v-text-field v-model="userData.email" :rules="emailRules" label="E-mail" required></v-text-field>
                             <v-btn :disabled="!formValid" @click="sendData"  color="success" class="white--text">
                                 Recuperar password
                             </v-btn>
                         </v-form>
+                        </div>
                         <v-alert :value="success" type="success">
                             Se ha enviado un mensaje de recuperación a <strong>{{userData.email}}</strong>
                         </v-alert>
@@ -45,6 +47,7 @@
                 name: 'ForgotPassword',
                 data() {
                     return {
+                        submitEmail1: true,
                         submitEmail:false,
                         success: false,
                         error: false,
@@ -72,6 +75,7 @@
                             this.forgotPassword(this.userData)
                                     .then(function () {
                                         vm.submitEmail = true;
+                                        vm.submitEmail1=false;
                                         vm.success = true;
                                         vm.error = false;
                                     })

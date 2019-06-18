@@ -245,7 +245,6 @@ export const actions = {
             axios.post(`/recover-p/`,payload)
             .then(response => {
                 resolve(response);
-                resolve('Ocurrio un error, intente nuevamente')
             })
             .catch(error => {
                 reject(error.response.data.error);
