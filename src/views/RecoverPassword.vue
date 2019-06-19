@@ -20,7 +20,8 @@
                                 actualizar password
                             </v-btn>
                         </v-form>
-                        <v-toolbar-title >  <router-link :to="{name:'login'}"><h2 v-show="success">Se ha restablecido tu nueva contraseña</h2> </router-link></v-toolbar-title>               
+                        <v-toolbar-title  v-show="success">  <h2>Se ha restablecido tu nueva contraseña</h2> </v-toolbar-title>
+                        <router-link :to="{name:'login'}"> <p class="text-md-right" v-show="success">Entra a tu cuenta aqui</p></v-toolbar-title> </router-link> 
                         <v-alert v-show="nomatch" type="error">
                             Las contraseñas no coinciden
                         </v-alert>
