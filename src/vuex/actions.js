@@ -64,8 +64,7 @@ export const actions = {
                 headers: {
                     'x-access-token': store.state.auth
                 }
-            })
-                    .then(response => {
+            }).then(response => {
                         resolve(response.data);
                     });
         });
@@ -147,6 +146,7 @@ export const actions = {
                 error.message = 'Ingresa el password que contenga al menos 6 caracteres';
                 error.confirmationError = 1;
                 return reject(error);
+                
             }
             if (!payload.username) {
                 error.message = 'Ingresa un Username';
@@ -251,4 +251,25 @@ export const actions = {
             })
         });
     }, //End recoverPassword
+    registerTournament( {
+        commit
+        }, payload) {
+            console.log(payload);
+            return new Promise((resolve, reject) => {
+                let vm = this;
+                    axios.post(`/tournament`, payload,
+                    {
+                        headers: {
+                            'x-access-token': store.state.auth
+                        }
+                    }
+                    ).then(function (response) {
+                        resolve();
+                    }).catch(function (error) {
+                        reject({
+                            message: error.response.data.error
+                        });
+                    });
+            });
+        }, //End registerUser    
 } //End Actions
